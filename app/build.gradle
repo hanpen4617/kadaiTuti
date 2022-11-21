@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'realm-android'
 }
 
 android {
@@ -9,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.kadaituti"
-        minSdk 24
+        minSdk 26
         targetSdk 32
         versionCode 1
         versionName "1.0"

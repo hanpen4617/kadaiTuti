@@ -1,13 +1,12 @@
 package com.example.kadaituti
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
+
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.GridView
 import com.example.kadaituti.databinding.ActivityMainBinding
+import io.realm.Realm
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -15,25 +14,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        Realm.init(this)
+        val grid: GridView = binding.dailyGridView
+        val adapter = GridAdapter(this)
+        grid.adapter = adapter
+
         binding.intentButton.setOnClickListener{
             val intent = Intent(this, IntentActivity::class.java)
             startActivity(intent)
-        }
-         fun createNotificationChannel() {
-            // Create the NotificationChannel, but only on API 26+ because
-            // the NotificationChannel class is new and not in the support library
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val name = "タイトル"
-                val descriptionText = "本文"
-                val importance = NotificationManager.IMPORTANCE_DEFAULT
-                val channel = NotificationChannel("channel", name, importance).apply {
-                    description = descriptionText
-                }
-                // Register the channel with the system
-                val notificationManager: NotificationManager =
-                    getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                notificationManager.createNotificationChannel(channel)
-            }
         }
     }
 }

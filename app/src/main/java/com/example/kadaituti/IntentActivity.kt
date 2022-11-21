@@ -1,5 +1,6 @@
 package com.example.kadaituti
 
+import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.app.TimePickerDialog
@@ -50,6 +51,7 @@ class IntentActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("SimpleDateFormat")
     fun showDialog(){
         //リスナーの設定
         val timeSetListener = TimePickerDialog.OnTimeSetListener{timePicker, hour, min ->
